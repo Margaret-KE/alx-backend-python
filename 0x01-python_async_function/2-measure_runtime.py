@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
+"""Task 2's module."""
 
-"""
-Module with a function that creates a task
-"""
 import asyncio
+import time
 
 
-wait_random = __import__('0-basic_async_syntax').wait_random
+wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
-def task_wait_random(max_delay: int) -> asyncio.Task:
+def measure_time(n: int, max_delay: int) -> float:
     """
-    wait for a random number of some seconds
-    and return an asyncio Task
+    Measure the excetution time of a subroutine
     Args:
-        max_delay (int): maximum number of seconds
-        to wait
+        n (int): number of times to run the subroutine
+        max_delay (int): maximum amout of time to delay
     Returns:
-        returns an asyncio task
+        returns a float
     """
-    return asyncio.create_task(wait_random(max_delay))
+    start_time = time.time()
+    asyncio.run(wait_n(n, max_delay))
+    return (time.time() - start_time) / n
